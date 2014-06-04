@@ -177,9 +177,6 @@ public class MainActivity extends Activity implements LocationClient.ConnectionC
                         } else {
                             Toast.makeText(MainActivity.this, "LocationClient not connected", LENGTH_SHORT).show();
                         }
-
-                        Log.d("sotg","latlng: " + latLng.latitude + " " + latLng.longitude);
-
                     }
                 });
 
