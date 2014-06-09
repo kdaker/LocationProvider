@@ -263,7 +263,7 @@ public class MainActivity extends Activity implements LocationClient.ConnectionC
         if (Settings.Secure.getString(getContentResolver(), Settings.Secure.ALLOW_MOCK_LOCATION).equals("1")) {
             locationClient.setMockMode(true);
         } else {
-            AlertDialog ad = new AlertDialog.Builder(this)
+            new AlertDialog.Builder(this)
                     .setTitle("Mock Locations Disabled")
                     .setMessage("Your mock locations are disabled from the developer options. Please enable mock locations to use this application.")
                     .setPositiveButton("ok",new DialogInterface.OnClickListener() {
