@@ -17,9 +17,12 @@
 package com.example.android.mocklocation;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.*;
 import android.location.Location;
 import android.os.Bundle;
 //import android.support.v4.app.FragmentActivity;
+import android.provider.Settings;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -27,10 +30,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -261,7 +260,19 @@ public class MainActivity extends Activity implements LocationClient.ConnectionC
 
     @Override
     public void onConnected(Bundle bundle) {
-        locationClient.setMockMode(true);
+        if (Settings.Secure.getString(getContentResolver(), Settings.Secure.ALLOW_MOCK_LOCATION).equals("1")) {
+            locationClient.setMockMode(true);
+        } else {
+            AlertDialog ad = new AlertDialog.Builder(this)
+                    .setTitle("Mock Locations Disabled")
+                    .setMessage("Your mock locations are disabled from the developer options. Please enable mock locations to use this application.")
+                    .setPositiveButton("ok",new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    }).show();
+        }
     }
 
     @Override
